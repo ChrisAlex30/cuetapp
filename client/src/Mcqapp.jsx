@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import './App.css'
-import { questionslist } from './question2'
+import { useNavigate } from 'react-router-dom';
 import Questions from './Questions'
 import Detaildiv from './Detaildiv'
 import Navbar from './Navbar'
@@ -34,14 +34,8 @@ const Mcqapp = () => {
 
   const [load, setload] = useState(false);
   const scorecardref=useRef()
-
-  // const [paperselect,setpaperselect]=useState(JSON.parse(localStorage.getItem("cuetpaper")) || {})
-
   let {subject,paper}=useParams()
-
-  // let [subject,setsubject]=useState("mat")
-
-  // let [paper,setpaper]=useState("Paper1")
+  const navigate = useNavigate();
 
   useEffect(() => {
     console.log(timeLeft);
@@ -82,17 +76,26 @@ const Mcqapp = () => {
 
         setload(false)
 
+      
+      if(data.msg.length<0)
+        {
+          setTimeLeft(0)
+          return navigate('/error')
+        }
+
         if(data.msg.length>0)
-       {
-        const papers = data.msg[0].Papers;
-        const paperValues = Object.values(papers)[0].questions
-        setquestions(paperValues)
-        setquestionobj(paperValues[0]);
-       }
-       else{
-        setTimeLeft(0)
-        alert("Plz Try Again!")
-       }
+          {
+            const papers = data.msg[0].Papers;
+            const paperValues = Object.values(papers)[0].questions
+            console.log('paperValues',paperValues);
+            if(!paperValues || paperValues.length==0)
+              {
+              setTimeLeft(0)
+               return navigate('/error')
+              }
+              setquestions(paperValues)
+              setquestionobj(paperValues[0]);
+          }  
 
   }
  

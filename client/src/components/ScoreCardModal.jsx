@@ -2,8 +2,7 @@ import React from 'react'
 
 
 const ScoreCardModal=({scorecardref,scorecard})=>{
-
-
+ 
     return(
       
       <dialog ref={scorecardref} className='w-fit md:w-[35%] h-fit rounded-xl shadow-lg bg-slate-100'>
@@ -42,7 +41,7 @@ const ScoreCardModal=({scorecardref,scorecard})=>{
             </div>
             <hr className='h-0.5 bg-gray-500'/>
             <div className='flex justify-center'>
-                <button className='bg-green-700 hover:bg-green-800 mt-7 text-white text-md rounded px-5 py-2' onClick={()=>window.location.reload()}>Done</button>
+                <button className='bg-green-700 hover:bg-green-800 mt-7 text-white text-md rounded px-5 py-2' onClick={()=>{window.open('https://cuetugexam.in/cuet-exam-mock-test-papers')}}>Done</button>
             </div>
           </div>  
      </div>
