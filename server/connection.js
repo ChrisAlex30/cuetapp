@@ -1,7 +1,11 @@
 const mongoose=require('mongoose')
 
 //mongoose.connect('mongodb://localhost/cuetdb',)
-mongoose.connect('mongodb+srv://alex15530:IQ_Classes1@apps.moxew.mongodb.net/cuetapp')
+mongoose.connect('mongodb+srv://abhay:Abhay%40123@cluster0.xowgujp.mongodb.net/cuetdb?retryWrites=true&w=majority').then()
+.catch((err)=>{
+console.log(err);
+process.exit(1)
+})
 
 
 const cuetpapersschema = new mongoose.Schema({

@@ -50,7 +50,7 @@ res.sendFile(
 )
 );
 
-const port=3000
+const port=3100
 app.listen(port,()=> {
     console.log(`server is running in port:`,port)
 })
