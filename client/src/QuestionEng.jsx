@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 
-const QuestionEng = ({ questionobj, questionselected,setquestions,setquestionselected,backbtndisable,nextbtndisable,handlescorecard }) => {
+const QuestionEng = ({ questionobj, questionselected,setquestions,setquestionselected,backbtndisable,nextbtndisable,handlescorecard,questions }) => {
 
   const [selectedOptionIndex, setSelectedOptionIndex] = useState(null);
+  
 
   useEffect(() => {
-    console.log(questionobj.checkedOptionIndex);
-    if (questionobj && questionobj.checkedOptionIndex) {
-      console.log('hii');
+   
+    if (questionobj && questionobj.checkedOptionIndex!=null) {
+      // console.log(questionobj.checkedOptionIndex);
       setSelectedOptionIndex(questionobj.checkedOptionIndex);
     } else {
       setSelectedOptionIndex(null);
@@ -42,17 +43,12 @@ const QuestionEng = ({ questionobj, questionselected,setquestions,setquestionsel
     }
   ]
 
-  const handleOptionChange = (optionIndex) => {
-    
+  const handleOptionChange = (optionIndex,selectedOptionIndex) => {
+
     setSelectedOptionIndex(optionIndex);
   };
 
-  const formatTime = (time) => {
-    const minutes = Math.floor(time / 60);
-    const seconds = time % 60;
-    const formattedSeconds = seconds < 10 ? `0${seconds}` : seconds;
-    return `${minutes}:${formattedSeconds}`;
-  };
+ 
 
   const handlesubmit = (name) => {
     let check=false;
@@ -82,26 +78,35 @@ const QuestionEng = ({ questionobj, questionselected,setquestions,setquestionsel
           setquestionselected(questionselected+1)
           break;
           case 'BACK':
-            setquestionselected(questionselected-1)
+            setquestionselected(questionselected+1)
             break;
       }
-      console.log('questionselected',questionselected);
+      // console.log('questionselected',questionselected);
+    
       if(newStatus!=='')
       {
-      setquestions((prevQuestions) =>
-      prevQuestions.map((question, index) => {
-        console.log('questionselected',questionselected);
-        console.log(selectedOptionIndex);
-        return index === questionselected ? { ...question, status: newStatus, checkedOptionIndex: selectedOptionIndex } : question
-      }
+        // console.log('selectedOptionIndex',selectedOptionIndex);
+       const updatedQuestions=[...questions]
+       updatedQuestions[questionselected]={...updatedQuestions[questionselected], status: newStatus, checkedOptionIndex: selectedOptionIndex};
+
+       setquestions(updatedQuestions)
+       
+    //   setquestions((prevQuestions) =>
+    //   prevQuestions.map((question, index) => {
+    //     console.log('questionselected',questionselected);
+    //     console.log(selectedOptionIndex);
+    //     return index === questionselected ? { ...question,checkedOptionIndex: selectedOptionIndex, status: newStatus  } : question
+    //   }
         
-      )
-    );
+    //   )
+    // );
+   
     setquestionselected(questionselected+1)
     }
   }
    
   };
+  
   
 //  console.log('questionobj',questionobj);
   return (
@@ -131,7 +136,7 @@ const QuestionEng = ({ questionobj, questionselected,setquestions,setquestionsel
               name={`question_${questionselected}`}
               value={option.optionvalue}
               checked={selectedOptionIndex === optionIndex}
-              onChange={() => handleOptionChange(optionIndex)}
+              onChange={() => handleOptionChange(optionIndex,selectedOptionIndex)}
             />
             <label className='mx-1 text-[17px] font-medium' htmlFor={`option_${questionselected}_${optionIndex}`}>
               {String.fromCharCode(97 + optionIndex)}. <span dangerouslySetInnerHTML={{ __html: option.optionvalue }} />

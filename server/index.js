@@ -12,7 +12,7 @@ app.use(express.urlencoded({extended:true}))
 app.get('/api/cuet/:subject/:paper',async(req,res)=>{
     try {
         let {subject,paper}=req.params
-        console.log(req.params);
+        // console.log(req.params);
         if(!subject || !paper)
         return res.status(401).json({ msg: "Please Try Again" });
 

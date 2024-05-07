@@ -38,7 +38,7 @@ const Mcqapp = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(timeLeft);
+    // console.log(timeLeft);
     if (!getdataCalledRef.current) {
       getdataCalledRef.current = true;
       getdata();
@@ -87,7 +87,7 @@ const Mcqapp = () => {
           {
             const papers = data.msg[0].Papers;
             const paperValues = Object.values(papers)[0].questions
-            console.log('paperValues',paperValues);
+            // console.log('paperValues',paperValues);
             if(!paperValues || paperValues.length==0)
               {
               setTimeLeft(0)
@@ -180,7 +180,7 @@ const Mcqapp = () => {
         newStatus = ''; // Set default status here
         break;
     }
-    console.log('questionselected',questionselected);
+    // console.log('questionselected',questionselected);
     setquestions((prevQuestions) =>
       prevQuestions.map((question, index) =>
         index === questionselected ? { ...question, status: newStatus } : question
@@ -195,7 +195,7 @@ const Mcqapp = () => {
     let questionsCompleted = 0;
     let questionsWrong = 0;
     let totalmarks=0;
-    console.log(questions);
+    // console.log(questions);
 
     questions.forEach((question) => {
       ;

@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
-const Questions = ({ questionobj, questionselected,setquestions,setquestionselected,backbtndisable,nextbtndisable,handlescorecard,paperselect }) => {
+const Questions = ({ questionobj, questionselected,setquestions,setquestionselected,backbtndisable,nextbtndisable,handlescorecard,questions }) => {
 
   const [selectedOptionIndex, setSelectedOptionIndex] = useState(null);
+  
 
   useEffect(() => {
-    console.log(questionobj.checkedOptionIndex);
-    if (questionobj && questionobj.checkedOptionIndex) {
-      console.log('hii');
+   
+    if (questionobj && questionobj.checkedOptionIndex!=null) {
+      // console.log(questionobj.checkedOptionIndex);
       setSelectedOptionIndex(questionobj.checkedOptionIndex);
     } else {
       setSelectedOptionIndex(null);
@@ -42,8 +43,8 @@ const Questions = ({ questionobj, questionselected,setquestions,setquestionselec
     }
   ]
 
-  const handleOptionChange = (optionIndex) => {
-    
+  const handleOptionChange = (optionIndex,selectedOptionIndex) => {
+
     setSelectedOptionIndex(optionIndex);
   };
 
@@ -77,28 +78,36 @@ const Questions = ({ questionobj, questionselected,setquestions,setquestionselec
           setquestionselected(questionselected+1)
           break;
           case 'BACK':
-            setquestionselected(questionselected-1)
+            setquestionselected(questionselected+1)
             break;
       }
-      console.log('questionselected',questionselected);
+      // console.log('questionselected',questionselected);
+    
       if(newStatus!=='')
       {
-      setquestions((prevQuestions) =>
-      prevQuestions.map((question, index) => {
-        console.log('questionselected',questionselected);
-        console.log(selectedOptionIndex);
-        return index === questionselected ? { ...question, status: newStatus, checkedOptionIndex: selectedOptionIndex } : question
-      }
+        // console.log('selectedOptionIndex',selectedOptionIndex);
+       const updatedQuestions=[...questions]
+       updatedQuestions[questionselected]={...updatedQuestions[questionselected], status: newStatus, checkedOptionIndex: selectedOptionIndex};
+
+       setquestions(updatedQuestions)
+       
+    //   setquestions((prevQuestions) =>
+    //   prevQuestions.map((question, index) => {
+    //     console.log('questionselected',questionselected);
+    //     console.log(selectedOptionIndex);
+    //     return index === questionselected ? { ...question,checkedOptionIndex: selectedOptionIndex, status: newStatus  } : question
+    //   }
         
-      )
-    );
+    //   )
+    // );
+   
     setquestionselected(questionselected+1)
     }
   }
    
   };
   
-//  console.log('questionobj',questionobj);
+
   return (
     <>
    <div>
@@ -124,7 +133,7 @@ const Questions = ({ questionobj, questionselected,setquestions,setquestionselec
             name={`question_${questionselected}`}
             value={option.optionvalue}
             checked={selectedOptionIndex === optionIndex}
-            onChange={() => handleOptionChange(optionIndex)}
+            onChange={() => handleOptionChange(optionIndex,selectedOptionIndex)}
           />
           <label className='mx-1 text-[17px]   font-medium' htmlFor={`option_${questionselected}_${optionIndex}`}>
             {String.fromCharCode(97 + optionIndex)}. <span dangerouslySetInnerHTML={{ __html: option.optionvalue }} />
