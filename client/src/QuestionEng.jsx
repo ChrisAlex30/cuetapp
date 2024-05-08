@@ -8,7 +8,7 @@ const QuestionEng = ({ questionobj, questionselected,setquestions,setquestionsel
   useEffect(() => {
    
     if (questionobj && questionobj.checkedOptionIndex!=null) {
-      // console.log(questionobj.checkedOptionIndex);
+      console.log(questionobj.checkedOptionIndex);
       setSelectedOptionIndex(questionobj.checkedOptionIndex);
     } else {
       setSelectedOptionIndex(null);
@@ -27,7 +27,7 @@ const QuestionEng = ({ questionobj, questionselected,setquestions,setquestionsel
       disable:false
     },
     {
-      buttonname:"MARK FOR REVIEW & NEXT",
+      buttonname:"CLEAR RESPONSE",
       color:"bg-blue-800",
       disable:false
     },
@@ -71,8 +71,8 @@ const QuestionEng = ({ questionobj, questionselected,setquestions,setquestionsel
         case 'SAVE & MARK FOR REVIEW':
           newStatus = 'MarkedForReviewAndNext';
           break;
-        case 'MARK FOR REVIEW & NEXT':
-          newStatus='MarkedForReview'
+        case 'CLEAR RESPONSE':
+          newStatus='NotAnswered'
           break;
           case 'NEXT':
           setquestionselected(questionselected+1)
@@ -81,27 +81,27 @@ const QuestionEng = ({ questionobj, questionselected,setquestions,setquestionsel
             setquestionselected(questionselected+1)
             break;
       }
-      // console.log('questionselected',questionselected);
+    
     
       if(newStatus!=='')
       {
-        // console.log('selectedOptionIndex',selectedOptionIndex);
-       const updatedQuestions=[...questions]
-       updatedQuestions[questionselected]={...updatedQuestions[questionselected], status: newStatus, checkedOptionIndex: selectedOptionIndex};
+        const updatedQuestions=[...questions]
+        if(newStatus==='NotAnswered')
+          {
+            updatedQuestions[questionselected]={...updatedQuestions[questionselected], status: newStatus, checkedOptionIndex: null}
+            setquestions(updatedQuestions)
+            setSelectedOptionIndex(null)
+          
+          }
+         else{
+          updatedQuestions[questionselected]={...updatedQuestions[questionselected], status: newStatus, checkedOptionIndex: selectedOptionIndex};
 
-       setquestions(updatedQuestions)
-       
-    //   setquestions((prevQuestions) =>
-    //   prevQuestions.map((question, index) => {
-    //     console.log('questionselected',questionselected);
-    //     console.log(selectedOptionIndex);
-    //     return index === questionselected ? { ...question,checkedOptionIndex: selectedOptionIndex, status: newStatus  } : question
-    //   }
-        
-    //   )
-    // );
-   
-    setquestionselected(questionselected+1)
+          setquestions(updatedQuestions)
+       setquestionselected(questionselected+1)
+         }
+        // console.log('selectedOptionIndex',selectedOptionIndex);
+      
+      
     }
   }
    
@@ -163,7 +163,7 @@ const QuestionEng = ({ questionobj, questionselected,setquestions,setquestionsel
 
           <button
             onClick={()=>{if(window.confirm("Are You Sure To Submit?")){handlescorecard()}}}
-              className={`btn bg-purple-600  text-white text-xs font-medium mr-11 mb-3 px-2 py-2 rounded`}
+              className={`btn bg-purple-600 ml-auto  text-white text-xs font-medium mb-3 px-2 py-2 rounded`}
             >
             SUBMIT
             </button>

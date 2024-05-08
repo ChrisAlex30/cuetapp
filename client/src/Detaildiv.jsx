@@ -57,28 +57,21 @@ const Detaildiv = ({questions}) => {
     </div>
 
     <div className="seconddetailsdiv flex justify-between ">
+    <div className="answered flex flex-row gap-1.5 items-center">
+            <div className="rounded-lg border border-black text-white p-2  bg-yellow-500 text-center font-bold w-11 h-13">
+            {answeredAndMarkedForReviewCount}
+            </div>
+            <h2 className='text-left text-[15px] font-medium'>Answered & <br /> Marked for Review</h2>  
+        </div>
         <div className="answered flex flex-row gap-1.5 items-center">
             <div className="rounded-lg border border-black text-white p-2  bg-green-600 text-center font-bold w-10 h-13">
             {answeredCount}
             </div>
             <h2 className='text-left text-[15px] font-medium'>Answered</h2>  
         </div>
-        <div className="notvisiteddiv flex flex-row gap-1.5 items-center">
-            <div className="rounded-lg border border-black text-white p-2  bg-red-700 text-center font-bold w-10 h-10">
-            {markedForReviewCount}
-            </div>
-            <h2 className='text-left text-[15px] font-medium'>Marked For <br /> Review</h2>  
-        </div>
+       
     </div>
-    <div className="thirddetailsdiv flex justify-between">
-        <div className="answered flex flex-row gap-1.5 items-center">
-            <div className="rounded-lg border border-black text-white p-2  bg-yellow-500 text-center font-bold w-14 h-13">
-            {answeredAndMarkedForReviewCount}
-            </div>
-            <h2 className='text-left text-[15px] font-medium'>Answered & <br /> Marked for Review</h2>  
-        </div>
-        
-    </div>
+    
     </>
    
     
