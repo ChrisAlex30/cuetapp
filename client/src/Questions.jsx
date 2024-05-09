@@ -78,7 +78,7 @@ const Questions = ({ questionobj, questionselected,setquestions,setquestionselec
           setquestionselected(questionselected+1)
           break;
           case 'BACK':
-            setquestionselected(questionselected+1)
+            setquestionselected(questionselected-1)
             break;
       }
     
