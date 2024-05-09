@@ -22,17 +22,42 @@
   }
 
 
-
-
   /* Mobile */
 .list {
   display: grid;
   grid-template-columns: auto;
   
 }
+.img-fluid{
+  width: 100%!important;
+}
+.img-bigques{
+  width: 65%!important;
+}
+.img-option{
+  width: 60%!important;
+}
+
+.img-option1{
+  width: 60%!important;
+}
+
 
 @media (min-width: 640px) {
   /* Desktop style */
+  .img-fluid{
+    width: 45%!important;
+  }
+  .img-bigques{
+    width: 40%!important;
+  }
+
+  .img-option{
+    width: 21%!important;
+  }
+  .img-option1{
+    width: 26%!important;
+  }
   .list {
       grid-template-columns: repeat(2, auto);
       grid-gap: 1em 2em;

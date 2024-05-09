@@ -77,7 +77,7 @@ const Mcqapp = () => {
         setload(false)
 
       
-      if(data.msg.length<0)
+      if(data.msg.length===0)
         {
           setTimeLeft(0)
           return navigate('/error')
