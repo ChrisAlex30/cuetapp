@@ -22,6 +22,8 @@
   }
 
 
+
+
   /* Mobile */
 .list {
   display: grid;
@@ -37,6 +39,10 @@
 .img-option{
   width: 60%!important;
 }
+.img-optionsm{
+  width: 40%!important;
+}
+
 
 .img-option1{
   width: 60%!important;
@@ -54,6 +60,9 @@
 
   .img-option{
     width: 21%!important;
+  }
+  .img-optionsm{
+    width: 16%!important;
   }
   .img-option1{
     width: 26%!important;
